@@ -1,47 +1,30 @@
-import { useState } from "react";
-import { useWeather } from "./hooks/useWeather";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import Home from "./pages/Home";
+import ProductDetail from "./pages/ProductDetail";
+import Cart from "./pages/Cart";
+import Navbar from "./components/Navbar";
 
 function App() {
 
-  const [city, setCity] = useState("");
-  const [search, setSearch] = useState("");
-
-  const { data, loading, error } = useWeather(search);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setSearch(city);
-  };
-
   return (
-    <div style={{ padding: "40px" }}>
 
-      <h1>🌤 Weather App</h1>
+    <BrowserRouter>
 
-      <form onSubmit={handleSubmit}>
-        <input
-          value={city}
-          onChange={(e) => setCity(e.target.value)}
-          placeholder="Enter city"
-        />
+      <Navbar />
 
-        <button>Search</button>
-      </form>
+      <Routes>
 
-      {loading && <p>Loading...</p>}
+        <Route path="/" element={<Home />} />
+        <Route path="/product/:id" element={<ProductDetail />} />
+        <Route path="/cart" element={<Cart />} />
 
-      {error && <p>{error}</p>}
+      </Routes>
 
-      {data && (
-        <div>
-          <h2>{data.name}</h2>
-          <p>Temp: {data.main.temp} °C</p>
-          <p>Weather: {data.weather[0].main}</p>
-        </div>
-      )}
+    </BrowserRouter>
 
-    </div>
   );
+
 }
 
 export default App;
