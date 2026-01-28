@@ -1,15 +1,10 @@
+// global state vvsgej baigaa ym
+
 import { configureStore } from "@reduxjs/toolkit";
+import themeReducer from "../features/theme/themeSlice";
 
-import productReducer from "../features/products/productSlice";
-import cartReducer from "../features/cart/cartSlice";
-
-// Redux global store үүсгэж байна
 export const store = configureStore({
   reducer: {
-    // products reducer
-    products: productReducer,
-
-    // cart reducer
-    cart: cartReducer,
+    theme: themeReducer,
   },
 });

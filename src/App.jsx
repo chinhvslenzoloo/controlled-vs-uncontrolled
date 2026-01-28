@@ -1,30 +1,20 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useSelector } from "react-redux";
+import ThemeToggle from "./components/ThemeToggle";
 
-import Home from "./pages/Home";
-import ProductDetail from "./pages/ProductDetail";
-import Cart from "./pages/Cart";
-import Navbar from "./components/Navbar";
+function App(){
+    const mode = useSelector((state) => state.theme.mode);
 
-function App() {
+    return(
+        <div className={`min-h-screen flex flex-col items-center justify-center gap-6 
+            ${mode === "dark" ? "bg-gray-900 text-white":"bg-white text-black" }`}>
 
-  return (
+                <h1 className="text-3xl font-bold">
+                    redux dark /light mode
+                </h1>
+            <ThemeToggle />
 
-    <BrowserRouter>
-
-      <Navbar />
-
-      <Routes>
-
-        <Route path="/" element={<Home />} />
-        <Route path="/product/:id" element={<ProductDetail />} />
-        <Route path="/cart" element={<Cart />} />
-
-      </Routes>
-
-    </BrowserRouter>
-
-  );
-
+        </div>
+    )
 }
 
 export default App;
